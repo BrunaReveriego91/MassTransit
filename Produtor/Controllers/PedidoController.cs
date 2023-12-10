@@ -20,12 +20,12 @@ namespace Produtor.Controllers
         [HttpPost]
         public async Task<IActionResult> Post()
         {
-            var nomeFila = _configuration.GetSection("MassTransit")["NomeFila"] ?? string.Empty;
+            var nomeFila = _configuration.GetSection("MassTransitAzure")["NomeFila"] ?? string.Empty;
 
             var endpoint = await _bus
                .GetSendEndpoint(new Uri($"queue:{nomeFila}"));
 
-            await endpoint.Send(new Pedido(1, new Usuario(5, "Bruna", "bruna@email.com")));
+            await endpoint.Send(new Pedido(2, new Usuario(5, "Bruna", "bruna@email.com")));
             return Ok();
         }
     }
